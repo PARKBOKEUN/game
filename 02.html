@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#101827" />
+<title>별빛 점프탑 | 30층 미니 점프맵</title>
+<style>
+  :root{color-scheme:dark;--bg:#0b1220;--card:#172336;--line:#34465b;--ink:#f1f5fb;--sub:#a9b8cd;--gold:#ffdf86;--mint:#83ead5;}
+  *{box-sizing:border-box} html,body{margin:0;min-height:100%;background:var(--bg);font-family:system-ui,-apple-system,'Segoe UI','Malgun Gothic',sans-serif;color:var(--ink)}
+  body{background:radial-gradient(ellipse 75% 70% at 52% -10%,#23354f 0%,#101a2c 50%,#0b1220 100%);}
+  button{font:inherit;cursor:pointer;touch-action:manipulation} button:focus-visible{outline:3px solid #fff;outline-offset:3px}
+  .shell{max-width:1015px;margin:0 auto;padding:23px 22px 24px}
+  header{display:flex;gap:14px;align-items:center;justify-content:space-between;margin-bottom:16px}
+  .brand{display:flex;align-items:center;gap:12px}.logo{display:grid;place-items:center;width:43px;height:43px;border-radius:14px;background:#263f51;box-shadow:inset 0 0 0 1px #567c84;font-size:23px}
+  .brand h1{font-size:22px;line-height:1.12;margin:0;font-weight:900;letter-spacing:-.8px}.brand small{display:block;color:var(--sub);font-size:11px;margin-top:4px;letter-spacing:.4px}
+  .tag{color:#c0f4dd;background:#183f3c;border:1px solid #316e68;border-radius:99px;padding:6px 11px;font-size:12px;font-weight:800;white-space:nowrap}
+  .layout{display:grid;grid-template-columns:minmax(0,480px) minmax(235px,1fr);gap:20px;align-items:start;justify-content:center}
+  .gamewrap{min-width:0}.game{width:100%;aspect-ratio:2/3;max-height:min(75vh,720px);position:relative;background:#111f37;overflow:hidden;border:2px solid #53627d;border-radius:18px;box-shadow:0 24px 55px #0008,inset 0 0 0 2px #283952;isolation:isolate}
+  canvas{display:block;width:100%;height:100%;touch-action:none}
+  .game:after{content:"";pointer-events:none;position:absolute;inset:0;border-radius:16px;box-shadow:inset 0 0 30px #01081760}
+  .topHud{position:absolute;top:14px;left:13px;right:13px;z-index:5;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;pointer-events:none}
+  .tinyPanel{padding:8px 12px;border:1px solid #ffffff28;background:#0b1933b8;backdrop-filter:blur(9px);border-radius:12px;box-shadow:0 4px 20px #0003}
+  .hudCaption{font-size:9px;font-weight:800;color:#b9ccdf;letter-spacing:1.4px}.hudValue{font-size:21px;font-weight:900;line-height:1.2;font-variant-numeric:tabular-nums;letter-spacing:-.6px}.hudValue span{font-size:12px;color:#b7c4d8}
+  .stageChip{display:flex;flex-direction:column;align-items:flex-end;gap:3px;color:#dafbf4;text-shadow:0 2px 10px #0008;font-size:11px;font-weight:800;padding-top:7px}
+  .chargeWrap{position:absolute;bottom:15px;left:50%;transform:translateX(-50%);width:66%;max-width:270px;z-index:5;pointer-events:none;transition:opacity .2s}
+  .chargeTxt{font-size:10px;font-weight:900;letter-spacing:2px;text-align:center;text-shadow:0 2px 8px #000;margin-bottom:6px}.chargeBar{height:13px;background:#12243cdd;border:2px solid #ffffff9e;border-radius:30px;overflow:hidden;box-shadow:0 5px 13px #0008}.chargeFill{height:100%;width:0%;background:linear-gradient(90deg,#70efd1,#ffd070,#ff866e);border-radius:20px;transition:width .055s linear}.chargeWrap:not(.active){opacity:.52}
+  .toast{position:absolute;z-index:6;left:50%;top:20%;transform:translate(-50%,-10px);padding:9px 15px;border-radius:30px;color:#11232f;font-weight:900;font-size:13px;background:#c3ffdb;box-shadow:0 5px 35px #07121caa;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .18s,transform .18s}.toast.show{opacity:1;transform:translate(-50%,0)}
+  .overlay{position:absolute;inset:0;z-index:10;background:#071323af;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(6px)}.overlay[hidden]{display:none}
+  .modal{width:min(355px,100%);padding:27px 22px 25px;text-align:center;background:linear-gradient(160deg,#22354e 0%,#111d31 100%);border:1px solid #57738b;border-radius:22px;box-shadow:0 28px 70px #000a}
+  .modal .medal{font-size:49px;filter:drop-shadow(0 8px 9px #0004)}.modal .eyebrow{font-size:11px;font-weight:900;letter-spacing:2.5px;color:var(--mint);margin:13px 0 4px}
+  .modal h2{font-size:29px;margin:0 0 10px;line-height:1.2;letter-spacing:-1.1px}.modal p{font-size:13px;line-height:1.8;color:#c7d2e2;margin:0 0 20px}.modal strong{color:white}
+  .mainBtn{border:0;background:linear-gradient(180deg,#ffde87,#ffaf67);color:#29202c;font-size:15px;font-weight:950;border-radius:14px;padding:15px 21px;box-shadow:0 6px 0 #b36c49,0 12px 25px #0007;width:100%;transition:transform .12s,box-shadow .12s}.mainBtn:active{transform:translateY(4px);box-shadow:0 2px 0 #b36c49}
+  .resultLine{font-size:12px;color:#9dcfe0;margin:15px 0 0}.results{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:0 0 21px}.results[hidden]{display:none}.results div{background:#ffffff0b;border:1px solid #ffffff20;border-radius:12px;padding:11px 8px}.results b{display:block;font-size:23px}.results small{font-size:10px;color:#b9c8dc}
+  .side{display:flex;flex-direction:column;gap:14px}.panel{background:linear-gradient(145deg,#1a293d,#152235);border:1px solid #34475d;border-radius:17px;padding:18px;box-shadow:0 14px 36px #0002}.panel h3{font-size:15px;margin:0 0 15px}.panel .kicker{display:block;font-size:10px;letter-spacing:1.6px;color:var(--mint);font-weight:900;margin-bottom:6px}
+  .counterGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.counter{background:#0c1b2d;border:1px solid #2e435b;border-radius:12px;padding:12px}.counter .label{color:#a1b2c7;font-size:11px}.counter .number{font-size:25px;font-weight:900;font-variant-numeric:tabular-nums;margin-top:2px}
+  .routeLabel{display:flex;justify-content:space-between;font-size:12px;color:#b8c8d9;margin-bottom:10px}.routeLabel b{color:var(--gold)}.route{height:11px;background:#09192b;border-radius:40px;overflow:hidden;border:1px solid #395068}.routeFill{height:100%;width:0%;border-radius:30px;background:linear-gradient(90deg,#6ad9d0,#ead685);transition:width .3s ease}.cpLabels{display:flex;justify-content:space-between;font-size:10px;color:#869bb0;margin-top:7px;font-variant-numeric:tabular-nums}
+  .how{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:11px;font-size:12px;line-height:1.5;color:#c2cfdf}.how li{display:flex;gap:10px;align-items:center}.key{display:inline-grid;place-items:center;flex-shrink:0;min-width:36px;height:30px;border-radius:8px;background:#2b3d54;color:#fff;border:1px solid #5b6c81;box-shadow:0 3px 0 #0b1625;font-size:13px;font-weight:800;padding:0 6px}.hint{font-size:11px;line-height:1.7;color:#abbcd2;background:#101c2e;padding:11px 12px;border-radius:11px;margin-top:16px;border-left:3px solid #64dbb8}
+  .actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}.actionBtn{background:#21364b;color:#dce9f4;border:1px solid #4a6078;padding:11px 8px;border-radius:11px;font-size:12px;font-weight:800}.actionBtn:active{background:#304b65}.status{font-size:11px;color:#92a6bd;text-align:center;line-height:1.6}
+  .touch{display:none;gap:11px;margin-top:12px;align-items:center;justify-content:space-between;user-select:none;-webkit-user-select:none}.touch .move{display:flex;gap:10px}.control{border:1px solid #73869e;color:#fff;background:linear-gradient(#344a63,#243952);box-shadow:0 5px 0 #132235;border-radius:15px;width:71px;height:63px;font-weight:900;font-size:25px;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}.control.jump{font-size:14px;width:120px;background:linear-gradient(#f4c983,#e59a60);border-color:#ffdf9b;color:#2f2540;box-shadow:0 5px 0 #88593e}.control.pressed{transform:translateY(4px);box-shadow:0 1px 0 #132235}.control.jump.pressed{box-shadow:0 1px 0 #88593e}.touchHelp{font-size:11px;color:#97abc2;text-align:center;margin-top:10px;display:none}
+  footer{color:#7f94aa;text-align:center;margin-top:14px;font-size:11px;line-height:1.5}
+  @media(max-width:760px){.shell{max-width:530px;padding:11px 12px 22px}header{margin-bottom:10px}.brand h1{font-size:18px}.brand small{font-size:10px}.logo{width:37px;height:37px;border-radius:11px}.layout{display:flex;flex-direction:column;gap:13px}.gamewrap{width:100%}.game{max-height:none}.touch{display:flex}.touchHelp{display:block}.side{width:100%;display:flex;flex-direction:column;gap:10px}.panel{padding:14px}.panel.wide{grid-column:auto}.panel h3{font-size:13px}.counterGrid{gap:7px}.counter{padding:8px}.counter .number{font-size:19px}.panel.helpPanel{display:none}.status{grid-column:1/-1}footer{margin-top:8px}}
+  @media(max-width:380px){.control{width:62px;height:58px}.control.jump{width:104px}.side{grid-template-columns:1fr}.panel.wide{grid-column:auto}.game{border-radius:13px}}
+  @media (pointer:coarse) and (min-width:761px){.touch{display:flex}.touchHelp{display:block}}
+  @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition-duration:.001ms!important}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <header>
+    <div class="brand"><div class="logo" aria-hidden="true">✦</div><div><h1>별빛 점프탑</h1><small>STAR HOP · MINI JUMP CHALLENGE</small></div></div>
+    <div class="tag">30개 발판 · 3구역</div>
+  </header>
+  <div class="layout">
+    <div class="gamewrap">
+      <div class="game" id="game" aria-label="점프맵 게임 화면">
+        <canvas id="canvas" width="480" height="720" aria-label="플레이어가 발판을 타고 올라가는 게임"></canvas>
+        <div class="topHud"><div class="tinyPanel"><div class="hudCaption">CURRENT FLOOR</div><div class="hudValue" id="floorNumber">0 <span>/ 30</span></div></div><div class="stageChip"><span id="zoneName">✦ 새벽 협곡</span><span id="cpName" style="opacity:.75">다음 체크포인트 5층</span></div></div>
+        <div class="chargeWrap" id="chargeWrap"><div class="chargeTxt" id="chargeText">SPACE · 점프 충전</div><div class="chargeBar"><div class="chargeFill" id="chargeFill"></div></div></div>
+        <div class="toast" id="toast" role="status" aria-live="polite"></div>
+        <div class="overlay" id="overlay">
+          <div class="modal"><div class="medal" id="modalIcon">🌟</div><div class="eyebrow" id="modalEyebrow">30 FLOOR CHALLENGE</div><h2 id="modalTitle">정상까지 단 30칸!</h2><p id="modalDescription">방향키는 <strong>자리에서 방향만 전환</strong>해요.<br><strong>SPACE</strong>를 누르고 놓으면 수직 점프!<br><strong>SPACE + 방향키</strong>는 대각 점프입니다.</p><div class="results" id="results" hidden><div><b id="finishTime">00:00</b><small>클리어 시간</small></div><div><b id="finishJumps">0</b><small>총 점프 횟수</small></div></div><button class="mainBtn" id="mainBtn">게임 시작하기 →</button><div class="resultLine" id="modalFooter">PC: ← → 방향 선택 · SPACE 충전 및 발사 | 모바일: 하단 버튼</div></div>
+        </div>
+      </div>
+      <div class="touch" aria-label="모바일 게임 조작 버튼"><div class="move"><button class="control" id="leftBtn" aria-label="왼쪽 방향 선택">◀</button><button class="control" id="rightBtn" aria-label="오른쪽 방향 선택">▶</button></div><button class="control jump" id="jumpBtn" aria-label="점프 키를 길게 누른 후 놓으세요">▲ JUMP</button></div>
+      <div class="touchHelp">◀ ▶는 방향만 선택해요. JUMP만 누르면 수직, JUMP + 방향으로 대각 점프!</div>
+    </div>
+    <div class="side">
+      <section class="panel"><span class="kicker">YOUR RUN</span><h3>도전 기록</h3><div class="counterGrid"><div class="counter"><div class="label">⏱ 플레이 시간</div><div class="number" id="time">00:00</div></div><div class="counter"><div class="label">↗ 점프 횟수</div><div class="number" id="jumps">0</div></div><div class="counter"><div class="label">↘ 추락 횟수</div><div class="number" id="falls">0</div></div><div class="counter"><div class="label">🏆 최고 기록</div><div class="number" id="bestTime">--:--</div></div></div></section>
+      <section class="panel wide"><span class="kicker">ASCENT PROGRESS</span><h3>정상까지 얼마나?</h3><div class="routeLabel"><span>현재 최고 도달 층</span><b id="progressLabel">0 / 30</b></div><div class="route"><div class="routeFill" id="routeFill"></div></div><div class="cpLabels"><span>START</span><span>5</span><span>10</span><span>15</span><span>20</span><span>25</span><span>GOAL</span></div><div class="hint">💡 <strong>제자리에서 점프 방향을 정하세요!</strong> ◀ ▶만 누르면 이동하지 않습니다. SPACE만 누르면 수직 점프, SPACE + 방향키로 대각 점프! 5층마다 체크포인트가 있어요.</div></section>
+      <section class="panel helpPanel"><span class="kicker">HOW TO PLAY</span><h3>조작 방법</h3><ul class="how"><li><span class="key">← →</span> 또는 A / D로 바라보는 방향만 전환</li><li><span class="key">SPACE</span> 혼자 누르고 놓기 → 수직 점프</li><li><span class="key">SPACE + ← →</span> 함께 누르고 놓기 → 해당 방향으로 점프</li><li><span class="key">R</span> 처음부터 다시 시작</li><li><span class="key">ESC</span> 일시정지 / 이어하기</li></ul></section>
+      <div class="actions"><button class="actionBtn" id="soundBtn" aria-label="효과음 켜기 또는 끄기">🔊 효과음 켜짐</button><button class="actionBtn" id="restartBtn">↻ 처음부터</button></div>
+      <div class="status">✨ 외부 설치 없이 동작하는 HTML 한 장 게임<br>원작과 다른 독창적인 캐릭터·그래픽으로 제작</div>
+    </div>
+  </div>
+  <footer>별빛 점프탑 · 나만의 짧은 30층 점프 챌린지</footer>
+</div>
+<script>
+(()=>{
+'use strict';
+const W=480,H=720,TOP=30,STEP=108,GRAV=.50,PLAYER_W=28,PLAYER_H=37,MAXCHARGE=.78;
+const centers=[240,264,327,284,201,137,197,273,335,283,204,157,216,306,340,262,181,130,186,264,333,286,203,139,194,269,335,281,208,261,240];
+const platforms=[{n:0,x:0,w:W,y:0},...Array.from({length:TOP},(_,i)=>{const n=i+1;const w=n%5===0?154:(n%3===0?128:148);return {n,x:centers[n]-w/2,w,y:n*STEP,checkpoint:n%5===0,goal:n===TOP}})];
+const cvs=document.getElementById('canvas'),ctx=cvs.getContext('2d');
+const q=id=>document.getElementById(id);
+const overlay=q('overlay'),modalTitle=q('modalTitle'),modalDescription=q('modalDescription'),modalEyebrow=q('modalEyebrow'),modalIcon=q('modalIcon'),mainBtn=q('mainBtn'),results=q('results'),modalFooter=q('modalFooter');
+const soundBtn=q('soundBtn'),toastEl=q('toast');
+const L={left:false,right:false,jump:false},T={left:false,right:false,jump:false};
+let state='menu',clock=0,frames=0,jumps=0,falls=0,maxFloor=0,checkpoint=0,camY=-80,shake=0,charge=0,charging=false,chargeAim=0,aimReleaseFrame=-100,prevJump=false,toastUntil=0,particles=[],trails=[],winStart=0,soundOn=true,audio=null,best=null,lastTime=0,accumulator=0;
+const player={x:240,y:0,vx:0,vy:0,grounded:true,landed:0,facing:1};
+let last=performance.now();
+try{best=Number(localStorage.getItem('starHopBest'))||null}catch(e){}
+function fmt(s){s=Math.max(0,Math.floor(s));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
+function initAudio(){if(!soundOn)return;try{audio=audio||new (window.AudioContext||window.webkitAudioContext)();if(audio.state==='suspended')audio.resume()}catch(e){audio=null}}
+function playSound(kind){if(!soundOn||!audio)return;try{
+const t=audio.currentTime;let notes=[];
+if(kind==='charge')notes=[[280,.055,'sine',.025,360]];
+if(kind==='jump')notes=[[430,.14,'triangle',.09,660]];
+if(kind==='land')notes=[[140,.07,'triangle',.06,85]];
+if(kind==='fall')notes=[[330,.28,'sawtooth',.06,85]];
+if(kind==='check')notes=[[490,.12,'sine',.09,680],[730,.16,'sine',.085,900]];
+if(kind==='win')notes=[[523,.19,'triangle',.10,523],[659,.20,'triangle',.09,659],[784,.2,'triangle',.09,784],[1046,.48,'sine',.11,1046]];
+notes.forEach(([freq,dur,type,vol,end],i)=>{let o=audio.createOscillator(),g=audio.createGain(),at=t+i*(kind==='win'?.13:.075);o.type=type;o.frequency.setValueAtTime(freq,at);o.frequency.exponentialRampToValueAtTime(end,at+dur);g.gain.setValueAtTime(.0001,at);g.gain.exponentialRampToValueAtTime(vol,at+.015);g.gain.exponentialRampToValueAtTime(.0001,at+dur);o.connect(g).connect(audio.destination);o.start(at);o.stop(at+dur+.025)})}catch(e){}
+}
+function reset(){clock=0;frames=0;jumps=0;falls=0;maxFloor=0;checkpoint=0;camY=-80;shake=0;charge=0;charging=false;chargeAim=0;aimReleaseFrame=-100;prevJump=false;particles=[];trails=[];player.x=240;player.y=0;player.vx=0;player.vy=0;player.grounded=true;player.landed=0;Object.keys(L).forEach(k=>L[k]=false);Object.keys(T).forEach(k=>T[k]=false);document.querySelectorAll('.control').forEach(b=>b.classList.remove('pressed'));q('chargeFill').style.width='0%';hideToast();refreshHUD()}
+function start(){initAudio();reset();state='playing';overlay.hidden=true;last=performance.now()}
+function showModal(mode){overlay.hidden=false;results.hidden=true;
+if(mode==='menu'){modalIcon.textContent='🌟';modalEyebrow.textContent='30 FLOOR CHALLENGE';modalTitle.textContent='정상까지 단 30칸!';modalDescription.innerHTML='방향키는 <strong>자리에서 방향만 전환</strong>해요.<br><strong>SPACE</strong>를 누르고 놓으면 수직 점프!<br><strong>SPACE + 방향키</strong>는 대각 점프입니다.';mainBtn.textContent='게임 시작하기 →';modalFooter.textContent='PC: ← → 방향 선택 · SPACE 충전 및 발사 | 모바일: 하단 버튼'}
+else if(mode==='paused'){modalIcon.textContent='⏸';modalEyebrow.textContent='TAKE A BREAK';modalTitle.textContent='잠깐 쉬어가요';modalDescription.innerHTML='지금까지 올라온 기록은 그대로 유지됩니다.<br>준비되셨다면 다시 점프하세요!';mainBtn.textContent='이어하기 ▶';modalFooter.textContent='ESC 키로도 다시 시작할 수 있어요'}
+else if(mode==='win'){modalIcon.textContent='🏆';modalEyebrow.textContent='TOWER CLEARED!';modalTitle.textContent='30층 정상 정복!';modalDescription.innerHTML='모든 발판을 올라왔어요!<br><strong>완벽한 점프 챌린지 성공!</strong>';results.hidden=false;q('finishTime').textContent=fmt(clock);q('finishJumps').textContent=jumps;mainBtn.textContent='한 판 더 하기 ↻';modalFooter.textContent=best!==null&&clock<=best+.02?'✨ 새로운 개인 최고 기록!':'최고 기록 '+fmt(best||clock)+' · 다시 도전해보세요'}}
+function pause(){if(state==='playing'){state='paused';charging=false;charge=0;chargeAim=0;prevJump=false;showModal('paused');}else if(state==='paused')resume()}
+function resume(){initAudio();state='playing';overlay.hidden=true;prevJump=L.jump||T.jump;last=performance.now()}
+function toast(msg,seconds=1.6){toastEl.textContent=msg;toastEl.classList.add('show');toastUntil=performance.now()+seconds*1000}
+function hideToast(){toastEl.classList.remove('show');toastUntil=0}
+function emit(x,y,count,color,force=1){for(let i=0;i<count;i++){const a=Math.random()*Math.PI*2,s=(1.2+Math.random()*3.6)*force;particles.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s+1.7*force,t:0,life:25+Math.random()*30,color,r:2+Math.random()*3})}}
+// Jump King-style controls: the arrows select direction, but never translate the character on the ground.
+// Horizontal velocity is locked at takeoff; the player has no air steering.
+function inputDirection(){return Number(L.right||T.right)-Number(L.left||T.left)}
+function jump(){
+  const ratio=Math.min(1,charge/MAXCHARGE);
+  const heldDir=inputDirection();
+  // A tiny grace window makes releasing SPACE + arrow almost simultaneously feel natural.
+  // A new SPACE-only charge always starts with neutral aim (regardless of where the sprite faces).
+  const dir=heldDir || (frames-aimReleaseFrame<=7 ? chargeAim : 0);
+  player.grounded=false;player.vy=12.4+6.2*ratio;player.y+=2;
+  player.vx=dir*2.5; if(dir)player.facing=dir;
+  charging=false;charge=0;chargeAim=0;aimReleaseFrame=-100;
+  jumps++;shake=3.2;emit(player.x,player.y,10,'#a0f7de');playSound('jump')
+}
+function win(){state='win';winStart=performance.now();playSound('win');shake=12;emit(player.x,player.y+28,100,'#ffda84',2);emit(player.x,player.y+28,60,'#92f8ee',1.8);if(best===null||clock<best){best=clock;try{localStorage.setItem('starHopBest',String(clock))}catch(e){}}refreshHUD();showModal('win')}
+function land(p){player.y=p.y;player.vy=0;player.grounded=true;player.landed=p.n;player.vx=0;emit(player.x,player.y,7,p.checkpoint?'#fce28c':'#b0e9dd',.55);playSound('land');shake=1.3;
+if(p.n>maxFloor){maxFloor=p.n;if(p.n===TOP){win();return}}
+if(p.checkpoint&&p.n>checkpoint){checkpoint=p.n;playSound('check');emit(player.x,player.y+10,30,'#ffdf92');toast('✨ '+p.n+'층 체크포인트 저장!')}refreshHUD()}
+function rescue(){falls++;playSound('fall');shake=9;charging=false;charge=0;chargeAim=0;aimReleaseFrame=-100;player.x=centers[checkpoint];player.y=checkpoint*STEP;player.vx=0;player.vy=0;player.grounded=true;player.landed=checkpoint;camY=Math.max(-80,player.y-235);emit(player.x,player.y+15,20,'#a7cdff',1);toast('💫 '+(checkpoint||'시작')+'층에서 다시 도전!');refreshHUD()}
+function refreshHUD(){q('floorNumber').innerHTML=player.landed+' <span>/ 30</span>';q('time').textContent=fmt(clock);q('jumps').textContent=jumps;q('falls').textContent=falls;q('bestTime').textContent=best===null?'--:--':fmt(best);q('progressLabel').textContent=maxFloor+' / 30';q('routeFill').style.width=(maxFloor/30*100)+'%';const zone=maxFloor<10?'✦ 새벽 협곡':maxFloor<20?'✦ 보랏빛 하늘':'✦ 황금빛 정상';q('zoneName').textContent=zone;q('cpName').textContent=checkpoint===25?'정상이 눈앞에!':'다음 체크포인트 '+(Math.floor(checkpoint/5)*5+5)+'층'}
+function step(){frames++;if(state!=='playing')return;clock+=1/60;
+const jumping=L.jump||T.jump,dir=inputDirection();
+if(player.grounded){
+  player.vx=0; // Never walk, slide, or drift while grounded.
+  if(dir)player.facing=dir; // Direction key by itself only turns the character.
+  if(jumping){
+    if(!charging){charging=true;charge=0;chargeAim=0;aimReleaseFrame=-100;playSound('charge')}
+    charge=Math.min(MAXCHARGE,charge+1/60);
+    if(dir){chargeAim=dir;aimReleaseFrame=frames}
+  } else if(charging){jump()}
+}
+if(!player.grounded){
+  const oldY=player.y;player.vy-=GRAV;player.y+=player.vy;player.x+=player.vx;
+  // Wall collisions preserve the jump arc, without granting directional air control.
+  if(player.x<14){player.x=14;player.vx=0}else if(player.x>W-14){player.x=W-14;player.vx=0}
+  if(player.vy<=0){for(let i=platforms.length-1;i>=0;i--){const p=platforms[i];if(oldY>=p.y-.5&&player.y<=p.y&&player.x+PLAYER_W/2>p.x+4&&player.x-PLAYER_W/2<p.x+p.w-4){land(p);break}}}
+  if(frames%3===0)trails.push({x:player.x,y:player.y+16,t:0});
+}
+if(player.y<Math.max(checkpoint*STEP-210,maxFloor*STEP-405))rescue();
+const target=Math.max(-80,player.y-240);camY+=(target-camY)*.095;
+shake*=.85;
+if(frames%12===0)refreshHUD();
+q('chargeWrap').classList.toggle('active',charging);
+q('chargeFill').style.width=(charging?100*Math.min(1,charge/MAXCHARGE):0)+'%';
+const liveAim=dir||(charging&&frames-aimReleaseFrame<=7?chargeAim:0);
+q('chargeText').textContent=charging?'점프 파워 '+Math.round(charge/MAXCHARGE*100)+'% · '+(liveAim<0?'◀ 왼쪽':liveAim>0?'▶ 오른쪽':'↑ 수직'):'SPACE · 점프 충전';
+prevJump=jumping;
+}
+function rnd(n){const x=Math.sin(n*131.37+72.53)*43758.5453;return x-Math.floor(x)}
+function rect(x,y,w,h,r,color){ctx.fillStyle=color;ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fill()}
+function screenY(y){return H-(y-camY)}
+function bg(){const z=Math.min(2,Math.floor(Math.max(0,camY+100)/(STEP*10)));const shades=[['#112340','#325372'],['#212043','#55517b'],['#39304f','#8d6972']][z],g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,shades[0]);g.addColorStop(1,shades[1]);ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+ctx.save();for(let i=0;i<88;i++){const x=14+rnd(i+20)*455,y=((rnd(i+712)*950+camY*.10+1000)%950)-110;let a=.22+.4*(.5+.5*Math.sin(frames*.016+i*4));ctx.globalAlpha=a;ctx.fillStyle=i%9===0?'#ffe9ac':'#d7f5fb';ctx.fillRect(x,y,i%7===0?3:1.5,i%7===0?3:1.5)}ctx.restore();
+for(let k=0;k<3;k++){const o=camY*(.07+k*.06),color=[['#1c344c','#2b435e','#39586d'],['#262a51','#363b6a','#4b4c73'],['#433450','#59415a','#795363']][z][k];ctx.fillStyle=color;ctx.beginPath();ctx.moveTo(0,H);for(let x=-50;x<=W+50;x+=35){const y=H-90-k*51+Math.sin(x*.016+k*3+o*.003)*38+Math.sin(x*.034+k)*16-(o%130)*.23;ctx.lineTo(x,y)}ctx.lineTo(W,H);ctx.closePath();ctx.fill()}
+ctx.save();ctx.globalAlpha=.23;for(let j=0;j<11;j++){let y=((j*171+camY*.27)%1120+1120)%1120-200,x=20+rnd(j+100)*430;ctx.fillStyle='#d8d6fa';ctx.beginPath();ctx.ellipse(x,y,36+j%3*19,8+j%4*3,0,0,Math.PI*2);ctx.fill()}ctx.restore();
+const vign=ctx.createLinearGradient(0,0,W,0);vign.addColorStop(0,'#050a1a91');vign.addColorStop(.14,'#050a1a10');vign.addColorStop(.86,'#050a1a10');vign.addColorStop(1,'#050a1a91');ctx.fillStyle=vign;ctx.fillRect(0,0,W,H)
+}
+function drawPlatform(p){const y=screenY(p.y);if(y< -40||y>H+45)return;
+const isGold=p.checkpoint;const w=p.w,x=p.x;
+ctx.fillStyle='#07122270';ctx.fillRect(x+6,y+5,w,15);
+if(!p.n){ctx.fillStyle='#263e49';ctx.fillRect(0,y,480,H-y);ctx.fillStyle='#7da69f';ctx.fillRect(0,y-8,480,9);for(let i=0;i<22;i++){ctx.fillStyle=i%4===0?'#c8e8a3':'#426e70';ctx.fillRect(i*24,(y-8)+(i%3),8,3)}return}
+rect(x+3,y+2,w-6,18,5,isGold?'#715a5a':'#304c66');rect(x,y-5,w,10,4,isGold?'#ffdd8b':'#86d9c5');rect(x+9,y+8,w-18,5,2,isGold?'#b38c67':'#3c6881');
+ctx.fillStyle=isGold?'#fbe2a9':'#b9f3e1';for(let i=0;i<4;i++){const xx=x+16+i*(w-32)/3;ctx.fillRect(xx,y-4,2,3)}
+if(isGold){ctx.save();ctx.shadowBlur=17;ctx.shadowColor='#ffdd8c';ctx.fillStyle='#fbe79f';ctx.beginPath();ctx.arc(x+w/2,y-20,4.4+Math.sin(frames*.085+p.n)*1.4,0,Math.PI*2);ctx.fill();ctx.restore();ctx.textAlign='center';ctx.font='bold 11px system-ui';ctx.fillStyle='#fff0c3';ctx.fillText(p.goal?'★ GOAL':p.n+'F SAVE',x+w/2,y-28)}
+else if(p.n%3===0){ctx.fillStyle='#dfedef';ctx.font='bold 10px system-ui';ctx.textAlign='center';ctx.fillText(p.n+'F',x+w/2,y-17)}
+ctx.strokeStyle=isGold?'#b1a27c':'#344b65';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x+16,y+18);ctx.lineTo(x+13,y+25);ctx.moveTo(x+w-20,y+18);ctx.lineTo(x+w-17,y+23);ctx.stroke()
+}
+function drawPlayer(){const x=player.x,y=screenY(player.y),bob=charging?Math.sin(frames*.2)*1.2:0;if(y>H+65||y< -60)return;const squat=charging?5:0;
+ctx.save();ctx.translate(Math.round(x),Math.round(y+bob));
+if(player.grounded){ctx.fillStyle='#080f1e77';ctx.beginPath();ctx.ellipse(0,2,18,5,0,0,2*Math.PI);ctx.fill()}
+const fallstretch=!player.grounded&&Math.abs(player.vy)>8?2:0;
+// backpack + scarf
+rect(-16,-29+squat,32,26-squat+fallstretch,10,'#4a6095');
+rect(-13,-33+squat,26,29-squat+fallstretch,8,'#e1e5f0');
+rect(-13,-31+squat,26,18,7,'#f2eee7');
+rect(-14,-27+squat,29,16,7,'#2c456b');
+rect(-11,-25+squat,23,12,5,'#95e9e4');
+ctx.fillStyle='#213347';ctx.fillRect((player.facing<0?-8:-4),-21+squat,3,4);ctx.fillRect((player.facing<0?3:7),-21+squat,3,4);
+ctx.fillStyle='#fff';ctx.fillRect((player.facing<0?-7:-3),-22+squat,1.5,1.5);ctx.fillRect((player.facing<0?4:8),-22+squat,1.5,1.5);
+rect(-13,-14+squat,26,7,3,'#f2bc77');
+rect(-9,-7,7,7,2,'#3a496b');rect(4,-7,7,7,2,'#3a496b');
+ctx.fillStyle='#f3d69a';ctx.fillRect(player.facing>=0?10:-15,-13+squat,5,9);
+ctx.fillStyle='#fff7cf';ctx.beginPath();ctx.arc(0,-37+squat,3,0,Math.PI*2);ctx.fill();
+if(charging){ctx.strokeStyle='#ffe49e';ctx.lineWidth=2.5;ctx.globalAlpha=.5+Math.sin(frames*.24)*.35;ctx.beginPath();ctx.arc(0,-19,27+charge/MAXCHARGE*9,-Math.PI*.88,-Math.PI*.12);ctx.stroke();
+const aim=inputDirection()||(frames-aimReleaseFrame<=7?chargeAim:0);ctx.globalAlpha=.92;ctx.textAlign='center';ctx.font='bold 23px system-ui';ctx.fillStyle='#ffecab';ctx.fillText(aim===0?'↑':aim<0?'↖':'↗',aim*28,-53)}
+ctx.restore()
+}
+function drawParticles(){for(const tr of trails){const y=screenY(tr.y);ctx.fillStyle='rgba(184,251,247,'+(Math.max(0,.18-tr.t*.006))+')';ctx.beginPath();ctx.arc(tr.x,y,9-tr.t*.16,0,2*Math.PI);ctx.fill()}trails=trails.filter(t=>(t.t+=1)<22);
+for(const p of particles){const y=screenY(p.y);ctx.globalAlpha=Math.max(0,1-p.t/p.life);ctx.fillStyle=p.color;ctx.beginPath();ctx.arc(p.x,y,Math.max(.2,p.r*(1-p.t/p.life)),0,Math.PI*2);ctx.fill();p.x+=p.vx;p.y+=p.vy;p.vy-=.10;p.vx*=.986;p.t++}ctx.globalAlpha=1;particles=particles.filter(p=>p.t<p.life)}
+function drawDecor(){const y=screenY(TOP*STEP);if(y>-70&&y<H+125){ctx.save();ctx.translate(centers[TOP],y-52);const bob=Math.sin(frames*.06)*3;ctx.globalAlpha=.15;ctx.fillStyle='#fff3a3';ctx.beginPath();ctx.arc(0,0,61,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;ctx.font='54px system-ui';ctx.textAlign='center';ctx.shadowColor='#fff2a6';ctx.shadowBlur=18;ctx.fillText('🏆',0,12+bob);ctx.restore()}
+for(let i=1;i<=TOP;i++){if(i%5!==0)continue;const y=screenY(i*STEP);if(y<0||y>H)continue;ctx.fillStyle='#ffe3a327';ctx.fillRect(0,y,480,1)}}
+function draw(){ctx.save();ctx.clearRect(0,0,W,H);if(shake>.1){ctx.translate((Math.random()-.5)*shake,(Math.random()-.5)*shake)}bg();for(const p of platforms)drawPlatform(p);drawDecor();drawParticles();drawPlayer();ctx.restore()}
+function render(now){const dt=Math.min(.05,(now-last)/1000);last=now;accumulator+=dt;let count=0;while(accumulator>=1/60&&count<4){step();accumulator-=1/60;count++}draw();if(toastUntil&&now>toastUntil)hideToast();requestAnimationFrame(render)}
+function key(e,down){const code=e.code;if(['ArrowLeft','ArrowRight','Space','KeyA','KeyD','Escape'].includes(code))e.preventDefault();if(code==='ArrowLeft'||code==='KeyA')L.left=down;if(code==='ArrowRight'||code==='KeyD')L.right=down;if(code==='Space')L.jump=down;
+if(down&&!e.repeat){if(code==='KeyR'){start()}if(code==='KeyM'){toggleSound()}if(code==='Escape')pause();if(state==='menu'&&(code==='Enter'||code==='Space'))start();if(state==='win'&&code==='Enter')start()}}
+window.addEventListener('keydown',e=>key(e,true));window.addEventListener('keyup',e=>key(e,false));
+window.addEventListener('blur',()=>{Object.keys(L).forEach(k=>L[k]=false);Object.keys(T).forEach(k=>T[k]=false);document.querySelectorAll('.control').forEach(b=>b.classList.remove('pressed'));if(state==='playing')pause()});
+function bindTouch(id,k){const btn=q(id),release=(e)=>{if(e)e.preventDefault();T[k]=false;btn.classList.remove('pressed')};btn.addEventListener('pointerdown',e=>{if(state!=='playing')return;e.preventDefault();T[k]=true;btn.classList.add('pressed');try{btn.setPointerCapture?.(e.pointerId)}catch(_){}initAudio()});btn.addEventListener('pointerup',release);btn.addEventListener('pointercancel',release);btn.addEventListener('lostpointercapture',release);btn.addEventListener('contextmenu',e=>e.preventDefault())}
+bindTouch('leftBtn','left');bindTouch('rightBtn','right');bindTouch('jumpBtn','jump');
+function toggleSound(){soundOn=!soundOn;soundBtn.textContent=soundOn?'🔊 효과음 켜짐':'🔇 효과음 꺼짐';if(soundOn)initAudio()}
+soundBtn.addEventListener('click',toggleSound);q('restartBtn').addEventListener('click',start);mainBtn.addEventListener('click',()=>state==='paused'?resume():start());
+window.addEventListener('pagehide',()=>{if(state==='playing')state='paused'});
+// Retain a sharp, fixed logical resolution while supporting high-DPI displays.
+function scaleCanvas(){const dpr=Math.min(window.devicePixelRatio||1,2);cvs.width=Math.round(W*dpr);cvs.height=Math.round(H*dpr);ctx.setTransform(dpr,0,0,dpr,0,0)}window.addEventListener('resize',scaleCanvas);scaleCanvas();
+showModal('menu');refreshHUD();requestAnimationFrame(render);
+// Self-contained game diagnostics for browser testing (not part of the UI).
+window.__starHopDebug={get state(){return state},get player(){return {...player}},get platforms(){return platforms.map(p=>({...p}))},get maxFloor(){return maxFloor},get checkpoint(){return checkpoint},get clock(){return clock},get falls(){return falls},get jumps(){return jumps},get charging(){return charging},get chargeAim(){return chargeAim},get inputDirection(){return inputDirection()}};
+})();
+</script>
+</body>
+</html>
